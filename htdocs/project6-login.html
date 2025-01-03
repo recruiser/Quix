@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="security.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="security.js" defer></script>
+    <style>
+        body {
+            background-color: #c3c7cb;
+            margin: 0;
+            font-family: "MS Sans Serif", Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .dotted-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 5000px;
+            height: 5000px;
+            background-color: #e0e0e0;
+            background-image: radial-gradient(#a0a0a0 15%, transparent 16%);
+            background-size: 20px 20px;
+            z-index: 1;
+            animation: ripple 3s infinite linear;
+        }
+
+        .login-window {
+            width: 300px;
+            position: relative;
+            z-index: 2;
+            border: 2px solid #808080;
+            background-color: #c3c7cb;
+            box-shadow: 2px 2px 0px #808080, 4px 4px 0px #ffffff;
+        }
+
+        .title-bar {
+            background-color: #000080;
+            color: white;
+            padding: 3px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .content {
+            padding: 20px;
+            background-color: #c3c7cb;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 5px;
+            border: 2px inset #fff;
+            background-color: #fff;
+            box-sizing: border-box;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        .login-button {
+            width: 80px;
+            padding: 5px;
+            background-color: #c3c7cb;
+            border: 2px outset #fff;
+            color: #000;
+            cursor: pointer;
+            font-family: "MS Sans Serif", Arial, sans-serif;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        .login-button:active {
+            border-style: inset;
+            background-color: #c3c7cb;
+        }
+
+        .login-button:focus {
+            outline: 1px dotted #000;
+            outline-offset: -4px;
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .success-message {
+            color: green;
+            margin-top: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="dotted-canvas"></div>
+    <div class="login-window">
+        <div class="title-bar">
+            <span>Login Required</span>
+        </div>
+        <div class="content">
+            <form id="loginForm" onsubmit="return validateLogin(event)">
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" required>
+                </div>
+                <div class="button-group">
+                    <button type="submit" class="login-button">Login</button>
+                </div>
+                <div id="errorMessage" class="error-message">Invalid username or password</div>
+                <div id="successMessage" class="success-message"></div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function validateLogin(event) {
+            event.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('errorMessage');
+
+            const validCredentials = {
+                'admin': 'Dragon.//++92',
+                'client': 'c1234t'
+            };
+
+            if (validCredentials[username] === password) {
+                sessionStorage.setItem('authenticated', 'true');
+                sessionStorage.setItem('username', username);
+                window.location.href = 'project6.html';
+            } else {
+                errorMessage.textContent = 'Invalid username or password';
+                errorMessage.style.display = 'block';
+            }
+
+            return false;
+        }
+    </script>
+</body>
+</html> 
