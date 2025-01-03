@@ -383,8 +383,8 @@ body {
 
 .social-icons {
     position: fixed;
-    bottom: 350px;
-    left: 50%;
+    top: 30px;
+    left: 90%;
     transform: translateX(-50%);
     display: flex;
     gap: 20px;
@@ -392,13 +392,14 @@ body {
 }
 
 .social-icon {
+    
     width: 32px;
     height: 32px;
     border-radius: 50%;
     background-color: #c3c7cb;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content:center;
+    align-items:center;
     cursor: pointer;
     box-shadow: 
         inset 1px 1px #ffffff,
